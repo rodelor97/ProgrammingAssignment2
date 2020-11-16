@@ -1,11 +1,11 @@
-#' Class for functions to create and use a cached matrix object, which holds
+#' Class for functions to create and use a cached matrix wrapper object, which holds
 #' a matrix and potentially its inverse matrix
 #' 
 #' @description 
 #' This class has two functions:
 #' * makeCacheMatrix: Function to create a matrix wrapper with functions to access
-#' a matrix and its inverse. Inverse is null be default
-#' * cacheSolve: Function to cache the inverse matrix in the matrix wrapper and
+#' a matrix and its inverse. Inverse matrix is null by default
+#' * cacheSolve: Function to cache the inverse matrix in the cached matrix wrapper and
 #' also return the inverse matrix
 
 
@@ -46,10 +46,9 @@ makeCacheMatrix <- function(x = matrix()) {
 
 
 #' Returns a matrix that is the inverse of the cached matrix objects matrix 
-#' value. It also sets the inverse matrix in the cached matrix wrapper for 
-#' future use  
-#' @param x A cached matrix, see makeCacheMatrix above
-#' @return an inverse matrix of the cached matrix
+#' value. It also sets the inverse matrix in the cached matrix wrapper
+#' @param x A cached matrix wrapper object, see makeCacheMatrix above
+#' @return an inverse matrix of the cached matrix wrapper's matrix
 #' @example 
 #' > matr <- matrix(c(4, 7, 2, 6), ncol=2) # test matrix
 #' > matcache <- makeCacheMatrix(matr)
