@@ -29,6 +29,8 @@
 #'[2,]    7    6
 #'> matcache$getinverse()
 #'NULL
+#'
+#' @export
 makeCacheMatrix <- function(x = matrix()) {
   m <- NULL
   set <- function(y) {
@@ -49,7 +51,7 @@ makeCacheMatrix <- function(x = matrix()) {
 #' value. It also sets the inverse matrix in the cached matrix wrapper
 #' @param x A cached matrix wrapper object, see makeCacheMatrix above
 #' @return an inverse matrix of the cached matrix wrapper's matrix
-#' @example 
+#' @examples 
 #' > matr <- matrix(c(4, 7, 2, 6), ncol=2) # test matrix
 #' > matcache <- makeCacheMatrix(matr)
 #' > invmat <- cacheSolve(matcache)
@@ -65,6 +67,8 @@ makeCacheMatrix <- function(x = matrix()) {
 #'      [,1] [,2]
 #'[1,]  0.6 -0.2
 #'[2,] -0.7  0.4
+#'
+#' @export
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
   m <- x$getinverse()
