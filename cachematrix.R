@@ -14,7 +14,7 @@
 #' This function creates, a cached matrix wrapper, a matrix container that can 
 #' contain a matrix and its inverse matrix
 #' 
-#' @param x A matrix
+#' @param matrx A matrix
 #' @return A special matrix wrapper that includes its inverse. The object 
 #' contains four functions:
 #' * get(): returns matrix
@@ -32,15 +32,15 @@
 #'NULL
 #'
 #' @export
-makeCacheMatrix <- function(x = matrix()) {
-  m <- NULL
-  set <- function(y) {
-    x <<- y
-    m <<- NULL
+makeCacheMatrix <- function(matrx = matrix()) {
+  inv_matr <- NULL
+  set <- function(new_matrx) {
+    matrx <<- new_matrx
+    inv_matr <<- NULL
   }
-  get <- function() { x }
-  setinverse <- function(inverse) { m <<- inverse }
-  getinverse <- function () { m }
+  get <- function() { matrx }
+  setinverse <- function(inverse) { inv_matr <<- inverse }
+  getinverse <- function () { inv_matr }
   list(set = set, 
        get = get, 
        setinverse = setinverse, 
@@ -50,7 +50,8 @@ makeCacheMatrix <- function(x = matrix()) {
 
 #' Returns a matrix that is the inverse of the cached matrix objects matrix 
 #' value. It also sets the inverse matrix in the cached matrix wrapper
-#' @param x A cached matrix wrapper object, see makeCacheMatrix above
+#' @param matrx_wrap A cached matrix wrapper object that holds a matrix and its
+#' inverse potentially, see makeCacheMatrix above
 #' @return an inverse matrix of the cached matrix wrapper's matrix
 #' @examples 
 #' > matr <- matrix(c(4, 7, 2, 6), ncol=2) # test matrix
@@ -70,17 +71,17 @@ makeCacheMatrix <- function(x = matrix()) {
 #'[2,] -0.7  0.4
 #'
 #' @export
-cacheSolve <- function(x, ...) {
+cacheSolve <- function(matrx_wrap, ...) {
         ## Return a matrix that is the inverse of 'x'
-  m <- x$getinverse()
-  if (!is.null(m)) {
+  inv_matx <- matrx_wrap$getinverse()
+  if (!is.null(inv_matx)) {
     message("getting cached inverse matrix")
-    return(m)
+    return(inv_matx)
   } else {
     message("creating cached inverse matrix")
-    data <- x$get()
-    m2 <- solve(data, ...)
-    x$setinverse(m2)
-    m2
+    data <- matrx_wrap$get()
+    inv_matx2 <- solve(data, ...)
+    matrx_wrap$setinverse(inv_matx2)
+    inv_matx2
   }
 }
