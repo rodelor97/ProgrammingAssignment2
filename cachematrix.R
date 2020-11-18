@@ -1,5 +1,6 @@
 #' Class for functions to create and use a cached matrix wrapper object, which holds
-#' a matrix and potentially its inverse matrix
+#' a matrix and potentially its inverse matrix. For this class assume the matrix
+#' is invertible
 #' 
 #' @description 
 #' This class has two functions:
